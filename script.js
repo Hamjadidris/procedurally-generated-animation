@@ -22,6 +22,7 @@ let screenHeight = window.innerHeight;
 let canvasOptions = {
   height: screenHeight,
   width: screenWidth,
+  wireframes: false,
 };
 
 // create a renderer
@@ -78,6 +79,9 @@ const testConstraint = Constraint.create({
   bodyB: circle2,
   length: 50,
   stiffness: 1,
+  render: {
+    lineWidth: 0,
+  },
 });
 
 Composite.add(engine.world, circle1);
