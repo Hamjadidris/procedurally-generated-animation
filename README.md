@@ -1,6 +1,4 @@
-# README #
-
-## Procedurally Generated Animation ##
+# Procedurally Generated Animation #
 
 ### Preview Link ###
 
