@@ -7,6 +7,14 @@ const canvas2 = document.querySelector("#canvas2");
 const canvas3 = document.querySelector("#canvas3");
 const scrollBtn = document.querySelector(".scroll-btn");
 const scrollBtn2 = document.querySelector(".scroll-btn2");
+const editBtn = document.querySelector(".edit-btn");
+const formCard = document.querySelector(".form-container");
+const radiusInput = document.querySelector("#radius");
+const spaceInput = document.querySelector("#space");
+const lengthInput = document.querySelector("#amount");
+const fillInput = document.querySelector("#fillColor");
+const outlineInput = document.querySelector("#outline");
+const randomizeBtn = document.querySelector(".randomize-btn");
 
 let buttonClicked = 1;
 scrollBtn.addEventListener("click", () => {
@@ -34,6 +42,19 @@ scrollBtn2.addEventListener("click", () => {
   buttonClicked = 1;
 });
 
+let formIsIn = false;
+editBtn.addEventListener("click", () => {
+  if (formIsIn) {
+    formCard.classList.remove("slide-in");
+    formCard.classList.add("slide-out");
+    formIsIn = false;
+    return;
+  }
+  formCard.classList.add("slide-in");
+  formCard.classList.remove("slide-out");
+  formIsIn = true;
+});
+
 // module aliases
 const {
   Engine,
@@ -57,8 +78,8 @@ const screenHeight = window.innerHeight;
 const halfScreenWidth = screenWidth / 2;
 const halfScreenHeight = screenHeight / 2;
 const canvasHeight = canvas1.offsetHeight;
-const halfCanvasHeight = canvasHeight / 2;
 const canvasWidth = canvas1.offsetWidth;
+const halfCanvasHeight = canvasHeight / 2;
 const halfCanvasWidth = canvasWidth / 2;
 const mouseDragCategory = 0x0001;
 const mouseDragCategory2 = Math.pow(2, 15);
@@ -141,15 +162,15 @@ let firstCanvas = function (p) {
 
 ////////////  Second canvas  ////////////
 
-// Make an array of circle radia depending on how many circles can fit the screen width
-const distanceBetween = Math.round(canvasWidth * 0.06); //
-const circleAmountPerScreen = canvasWidth / distanceBetween - 2; // minus 2 circles so there's a little space left
-const radiaArray = Array.from(
-  { length: circleAmountPerScreen <= 14 ? circleAmountPerScreen : 14 },
-  () => distanceBetween
-);
-
 let secondCanvas = function (p) {
+  // Make an array of circle radia depending on how many circles can fit the screen width
+  const distanceBetween = Math.round(canvasWidth * 0.06); //
+  const circleAmountPerScreen = canvasWidth / distanceBetween - 2; // minus 2 circles so there's a little space left
+  const radiaArray = Array.from(
+    { length: circleAmountPerScreen <= 14 ? circleAmountPerScreen : 14 },
+    () => distanceBetween
+  );
+
   let circles = [];
   p.setup = function () {
     engine2 = Engine.create({
@@ -247,8 +268,67 @@ let secondCanvas = function (p) {
 
 ////////////  Third canvas  ////////////
 
+// Make an array of circle radia depending on how many circles can fit the screen width
+let distanceBetween = Math.round(canvasWidth * 0.06); // 6 percent of the canvas width
+let myPrefferedRadius = distanceBetween;
+let fillColor = "#ffffff";
+let outlineColor = "#ffffff";
+let circleAmountPerScreen = canvasWidth / distanceBetween - 2; // minus 2 circles so there's a little space left
+let radiaArray = Array.from(
+  { length: circleAmountPerScreen <= 14 ? circleAmountPerScreen : 14 },
+  () => myPrefferedRadius
+);
+
+fillInput.addEventListener("input", (e) => {
+  let value = e.target.value;
+  fillColor = value;
+});
+outlineInput.addEventListener("input", (e) => {
+  let value = e.target.value;
+  outlineColor = value;
+});
+
 let thirdCanvas = function (p) {
   let circles = [];
+
+  radiusInput.addEventListener("input", (e) => {
+    let value = e.target.value;
+    myPrefferedRadius = parseInt(value);
+    circles.forEach((circle) => {
+      circle.circleRadius = myPrefferedRadius;
+    });
+  });
+
+  lengthInput.addEventListener("input", (e) => {
+    let value = e.target.value;
+    reRenderWorld();
+    circleAmountPerScreen = parseInt(value);
+    radiaArray = Array.from(
+      { length: circleAmountPerScreen <= 14 ? circleAmountPerScreen : 14 },
+      () => myPrefferedRadius
+    );
+    renderCircles();
+    circles.reverse();
+  });
+
+  spaceInput.addEventListener("input", (e) => {
+    let value = e.target.value;
+    distanceBetween = parseInt(value);
+    reRenderWorld();
+    renderCircles();
+    circles.reverse();
+  });
+
+  randomizeBtn.addEventListener("click", () => {
+    reRenderWorld();
+    radiaArray = Array.from(
+      { length: circleAmountPerScreen <= 14 ? circleAmountPerScreen : 14 },
+      () => Math.round(Math.random() * myPrefferedRadius) + 5
+    );
+    console.log(radiaArray);
+    renderCircles();
+    circles.reverse();
+  });
 
   p.setup = function () {
     engine3 = Engine.create({
@@ -262,11 +342,41 @@ let thirdCanvas = function (p) {
       bgColor: "#14151f",
     });
 
+    renderCircles();
+    circles.reverse();
+  };
+
+  p.draw = function () {
+    p.background("#14151f");
+    Engine.update(engine3);
+    p.stroke(outlineColor);
+    p.strokeWeight(4);
+    p.fill(fillColor);
+    circles.forEach((circle, i) => {
+      let pos = circle.position;
+      let r = circle.circleRadius; //myPrefferedRadius;
+
+      let angle = Math.atan(pos.y / pos.x) * 4;
+      p.push();
+      p.translate(pos.x, pos.y);
+      p.rotate(angle);
+      p.ellipse(0, 0, r * 2);
+      if (i === circles.length - 1) {
+        p.stroke(invertHex(outlineColor.substring(1)));
+        p.strokeWeight(r * 0.3);
+        p.point(-r / 2, -r + r / 2);
+        p.strokeWeight(r * 0.3);
+        p.point(-r / 2, r - r / 2);
+      }
+      p.pop();
+    });
+  };
+
+  function renderCircles() {
     const cicleOptions = {
       frictionAir: 0.5,
       restitution: 0.5,
     };
-
     radiaArray.forEach((radius, index) => {
       let circle;
       let prevCircle = circles[index - 1];
@@ -325,34 +435,28 @@ let thirdCanvas = function (p) {
         World.add(engine3.world, circleConstraint3);
       }
     });
-    circles.reverse();
-  };
+  }
 
-  p.draw = function () {
-    p.background("#14151f");
-    Engine.update(engine3);
-    p.stroke(255);
-    p.strokeWeight(4);
-    p.fill("#fff");
-    circles.forEach((circle, i) => {
-      let pos = circle.position;
-      let r = circle.circleRadius;
+  function reRenderWorld() {
+    circles = [];
+    World.clear(engine3.world);
 
-      let angle = Math.atan(pos.y / pos.x) * 4;
-      p.push();
-      p.translate(pos.x, pos.y);
-      p.rotate(angle);
-      p.ellipse(0, 0, r * 2);
-      if (i === circles.length - 1) {
-        p.stroke("#14151f");
-        p.strokeWeight(6);
-        p.point(-r / 2, -r + r / 2);
-        p.strokeWeight(6);
-        p.point(-r / 2, r - r / 2);
-      }
-      p.pop();
+    // add mouse contrainst back to world
+    const mouse = Mouse.create(canvas3);
+    const mouseConstraint = MouseConstraint.create(engine3, {
+      mouse: mouse,
+      constraint: {
+        stiffness: 0.2,
+        render: {
+          visible: false,
+        },
+      },
     });
-  };
+    World.add(engine3.world, mouseConstraint);
+    mouseConstraint.mouse.pixelRatio = pixelDensity();
+    mouseConstraint.collisionFilter.mask =
+      mouseDragCategory | mouseDragCategory2;
+  }
 };
 
 function setup() {
@@ -362,6 +466,9 @@ function setup() {
 }
 
 function createCustomCanvas(p5, engine, { canvasElement, bgColor }) {
+  const canvasHeight = canvas1.offsetHeight;
+  const canvasWidth = canvas1.offsetWidth;
+
   const canvas = p5.createCanvas(canvasWidth, canvasHeight, canvasElement);
   p5.background(bgColor);
 
@@ -378,4 +485,11 @@ function createCustomCanvas(p5, engine, { canvasElement, bgColor }) {
   World.add(engine.world, mouseConstraint);
   mouseConstraint.mouse.pixelRatio = pixelDensity();
   mouseConstraint.collisionFilter.mask = mouseDragCategory | mouseDragCategory2;
+}
+
+function invertHex(hex) {
+  return `#${(Number(`0x1${hex}`) ^ 0xffffff)
+    .toString(16)
+    .substring(1)
+    .toUpperCase()}`;
 }
