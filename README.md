@@ -1,7 +1,7 @@
 # README #
 
-### Procedurally Generated Animation ###
+## Procedurally Generated Animation ##
 
-## Link to design ##
+### Preview Link ###
 
 https://hamjadidris.github.io/procedurally-generated-animation/
