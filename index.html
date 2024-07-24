@@ -6,10 +6,112 @@
     <script src="matter.js" defer></script>
     <script src="script.js" defer></script>
     <script src="p5.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&family=Solway:wght@300;400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>P.G.A</title>
   </head>
+
   <body>
-    <p class="some-text">Drag the bright circle</p>
+    <main class="main-container">
+      <section class="main-section section1">
+        <div class="canvas-container" id="canvas-container1">
+          <canvas id="canvas1" class="canvas"></canvas>
+          <p class="canvas-text canvas-text1">Move the circle</p>
+        </div>
+        <div class="text-container">
+          <p class="blog-text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
+            placeat! Non sapiente recusandae quaerat eum at voluptatem quisquam
+            saepe repudiandae, temporibus doloribus nulla, maiores ab delectus
+            ipsa illum deleniti ullam? Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Itaque, placeat! Non sapiente recusandae quaerat
+            eum at voluptatem quisquam saepe repudiandae, temporibus doloribus
+            nulla, maiores ab delectus ipsa illum deleniti ullam? Lorem ipsum
+            dolor sit amet consectetur adipisicing elit. Itaque, placeat! Non
+            sapiente recusandae quaerat eum at voluptatem quisquam saepe
+            repudiandae, temporibus doloribus nulla, maiores ab delectus ipsa
+            illum deleniti ullam? Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Itaque, placeat! Non sapiente recusandae quaerat
+            eum at voluptatem quisquam saepe repudiandae, temporibus doloribus
+            nulla, maiores ab delectus ipsa illum deleniti ullam?
+          </p>
+        </div>
+      </section>
+
+      <section class="main-section section2">
+        <div class="canvas-container" id="canvas-container2">
+          <canvas id="canvas2" class="canvas"></canvas>
+          <p class="canvas-text canvas-text2">Move the highlighted circle</p>
+        </div>
+        <div class="text-container">
+          <p class="blog-text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
+            placeat! Non sapiente recusandae quaerat eum at voluptatem quisquam
+            saepe repudiandae, temporibus doloribus nulla, maiores ab delectus
+            ipsa illum deleniti ullam?
+          </p>
+        </div>
+      </section>
+
+      <section class="main-section section3">
+        <div class="canvas-container" id="canvas-container3">
+          <canvas id="canvas3" class="canvas"></canvas>
+          <p class="canvas-text canvas-text3">Move the head</p>
+        </div>
+        <div class="text-container">
+          <p class="blog-text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
+            placeat! Non sapiente recusandae quaerat eum at voluptatem quisquam
+            saepe repudiandae, temporibus doloribus nulla, maiores ab delectus
+            ipsa illum deleniti ullam?
+          </p>
+        </div>
+      </section>
+
+      <section class="main-section section4">
+        <a
+          href="https://youtu.be/qlfh_rv6khY?si=TvkHaFakwUSCb-On"
+          target="_blank"
+          class="section-link"
+          >Inspiration
+        </a>
+        <a href="https://brm.io/matter-js/" target="_blank" class="section-link"
+          >Physics Engine
+        </a>
+        <a
+          href="https://github.com/Hamjadidris"
+          target="_blank"
+          class="section-link"
+          >My Github</a
+        >
+      </section>
+    </main>
+
+    <button class="scroll-btn">
+      <span class="ball"></span>
+    </button>
+
+    <button class="scroll-btn2">
+      <svg
+        width="13"
+        height="18"
+        viewBox="0 0 8 12"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M6.5 11L1.5 6L6.5 1"
+          stroke="#252424"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
   </body>
 </html>
