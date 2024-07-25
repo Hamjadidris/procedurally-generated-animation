@@ -140,7 +140,7 @@ main {
 }
 
 .scroll-btn.jump {
-  animation: jump-shaking 0.83s 2 backwards;
+  animation: jump-shaking 0.83s 1.5s 3 backwards;
 }
 
 .scroll-btn::before {
@@ -285,6 +285,7 @@ main {
   padding: 0.5rem;
   background-color: var(--bg-color);
   border: 2px solid #2d3250;
+  color: #2d3250;
   font-size: 1rem;
   font-weight: 600;
   position: relative;
