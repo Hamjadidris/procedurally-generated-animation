@@ -26,20 +26,16 @@
         </div>
         <div class="text-container">
           <p class="blog-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
-            placeat! Non sapiente recusandae quaerat eum at voluptatem quisquam
-            saepe repudiandae, temporibus doloribus nulla, maiores ab delectus
-            ipsa illum deleniti ullam? Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Itaque, placeat! Non sapiente recusandae quaerat
-            eum at voluptatem quisquam saepe repudiandae, temporibus doloribus
-            nulla, maiores ab delectus ipsa illum deleniti ullam? Lorem ipsum
-            dolor sit amet consectetur adipisicing elit. Itaque, placeat! Non
-            sapiente recusandae quaerat eum at voluptatem quisquam saepe
-            repudiandae, temporibus doloribus nulla, maiores ab delectus ipsa
-            illum deleniti ullam? Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Itaque, placeat! Non sapiente recusandae quaerat
-            eum at voluptatem quisquam saepe repudiandae, temporibus doloribus
-            nulla, maiores ab delectus ipsa illum deleniti ullam?
+            Above are two bodies, constrained together relative to their
+            centers. After stumbling on a roughly 9 minutes video about
+            procedural animations and simulating biological movement, I wondered
+            if I could turn a couple sentences into actual working code. This
+            being the first step of that process.<br />
+            When two bodies are constrained at a distance an interesting
+            behavior is observed where the larger body takes precedence as you
+            would have also noticed, the bodies above bare a lot of resemblance
+            to a planet and it's moon. Yet another point for Einstein's General
+            Relativity
           </p>
         </div>
       </section>
@@ -51,10 +47,13 @@
         </div>
         <div class="text-container">
           <p class="blog-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
-            placeat! Non sapiente recusandae quaerat eum at voluptatem quisquam
-            saepe repudiandae, temporibus doloribus nulla, maiores ab delectus
-            ipsa illum deleniti ullam?
+            Although restraining two bodies at a distance relative to each other
+            is quite cool. Even more fun than a simple distance constraint is a
+            multiple distance constraint where each body is constrained to the
+            one before and or after it, each point of contact between the bodies
+            acting as a sort of spine.<br />
+            Using this simple concept we are able to simulate the movement of
+            different animals, ranging from worms to reptiles.
           </p>
         </div>
       </section>
@@ -106,10 +105,18 @@
         </div>
         <div class="text-container">
           <p class="blog-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque,
-            placeat! Non sapiente recusandae quaerat eum at voluptatem quisquam
-            saepe repudiandae, temporibus doloribus nulla, maiores ab delectus
-            ipsa illum deleniti ullam?
+            In order to properly simulate animal movement a few faults are to be
+            considered, for example; <br />
+            The body of our animal curving in on itself and bending past what we
+            would consider natural or the "head" of the animal going through and
+            overlapping with the rest of the body.<br />
+            With the introduction of a few rules like;
+            <br />
+            1> Preventing every Nth circle from colliding with circle Nth+2 and
+            Nth-2<br />
+            2> Enabling the "head" to collide with the rest of the body.<br />
+            We achieve a more natural movement for our animal, concluding our
+            biological simulation.
           </p>
 
           <div class="form-container">
@@ -172,7 +179,7 @@
 
               <button type="button" class="randomize-btn">
                 Randomize <br />
-                <small class="">You might just get another animal</small>
+                <!-- <small class="">You might just get another animal</small> -->
               </button>
             </form>
           </div>
@@ -193,8 +200,10 @@
           href="https://github.com/Hamjadidris"
           target="_blank"
           class="section-link"
-          >My Github</a
+          >Github</a
         >
+
+        <small class="">Thank you for reading.</small>
       </section>
     </main>
 

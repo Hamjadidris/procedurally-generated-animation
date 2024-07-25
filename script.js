@@ -251,7 +251,7 @@ let secondCanvas = function (p) {
 
     p.stroke(255);
     p.strokeWeight(2);
-    p.fill("#14151f");
+    p.fill("#00000000");
     circles.forEach((circle, i) => {
       if (i === circles.length - 1) p.fill("#fff");
       let pos = circle.position;
