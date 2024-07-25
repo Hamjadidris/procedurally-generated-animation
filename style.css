@@ -139,6 +139,10 @@ main {
   padding: 0.2rem 0.2rem;
 }
 
+.scroll-btn.jump {
+  animation: jump-shaking 0.83s 2 backwards;
+}
+
 .scroll-btn::before {
   position: absolute;
   bottom: -0.9rem;
@@ -366,5 +370,29 @@ input[type="range"]:focus::-moz-range-thumb {
   }
   to {
     right: -15rem;
+  }
+}
+
+@keyframes jump-shaking {
+  0% {
+    transform: translateX(-50%);
+  }
+  25% {
+    transform: translateX(-50%) translateY(-9px);
+  }
+  35% {
+    transform: translateX(-50%) translateY(-9px) rotate(17deg);
+  }
+  55% {
+    transform: translateX(-50%) translateY(-9px) rotate(-17deg);
+  }
+  65% {
+    transform: translateX(-50%) translateY(-9px) rotate(17deg);
+  }
+  75% {
+    transform: translateX(-50%) translateY(-9px) rotate(-17deg);
+  }
+  100% {
+    transform: translateX(-50%) translateY(0) rotate(0);
   }
 }

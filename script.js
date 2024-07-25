@@ -38,6 +38,7 @@ scrollBtn2.addEventListener("click", () => {
     behavior: "smooth",
   });
   scrollBtn.classList.remove("fade-out");
+  scrollBtn.classList.remove("jump");
   scrollBtn2.classList.remove("fade-in");
   buttonClicked = 1;
 });
